@@ -55,12 +55,7 @@ const App: React.FC = () => {
   };
 
   const handleFileSelect = (file: File) => {
-    // Feature Gate: Video Support
-    if (file.type.startsWith('video/') && plan === 'free') {
-      setError("Video analysis is a Pro feature. Please upgrade to continue.");
-      setIsPricingOpen(true);
-      return;
-    }
+    // Video support is now available for all plans
 
     setSelectedFile(file);
     setAdCopies([]);

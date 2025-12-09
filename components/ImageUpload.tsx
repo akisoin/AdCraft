@@ -142,12 +142,7 @@ export const ImageUpload: React.FC<MediaUploadProps> = ({
             <ImageIcon className="w-6 h-6 text-slate-400" />
             <span className="text-slate-600">|</span>
             <div className="relative">
-              <Video className={`w-6 h-6 ${isPro ? 'text-indigo-400' : 'text-slate-600'}`} />
-              {!isPro && (
-                <div className="absolute -top-2 -right-2 bg-slate-900 rounded-full p-0.5 border border-slate-700">
-                  <Lock size={10} className="text-yellow-500" />
-                </div>
-              )}
+              <Video className="w-6 h-6 text-slate-400" />
             </div>
           </>
         )}
@@ -158,7 +153,7 @@ export const ImageUpload: React.FC<MediaUploadProps> = ({
       </h3>
       <p className="text-slate-400 text-sm max-w-[200px]">
         Drag & drop or click. <br/>
-        <span className="text-xs text-slate-500">JPG, PNG supported. <br/> {isPro ? 'Video enabled.' : 'Video available in Pro.'}</span>
+        <span className="text-xs text-slate-500">JPG, PNG, MP4, MOV. <br/> Video supported.</span>
       </p>
     </div>
   );
