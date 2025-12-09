@@ -28,27 +28,27 @@ export const generateAdCopy = async (mediaFile: File): Promise<AdCopy[]> => {
     const mediaPart = await fileToGenerativePart(mediaFile);
     
     const prompt = `
-      You are an elite direct-response copywriter and media buyer.
+      You are an elite direct-response copywriter and media buyer with deep knowledge of the **Meta Ads Library** and **Google Keyword Planner**.
       Your task is to write high-converting ad copy for the uploaded creative (Image/Video).
       
-      **Expertise Requirements:**
-      - Model your copy after winning ads found in the **Meta Ads Library** (Facebook/Instagram).
-      - Incorporate psychological triggers and high-intent keywords relevant to **Google Search** trends.
-      - Focus on performance: Click-through Rate (CTR) and Conversion Rate (CVR).
+      **Strategic Requirements:**
+      1.  **Meta Ads Library Analysis**: Structure the copy based on high-performing "winning ads" currently active on Facebook/Instagram. Use patterns like "The Hook-Story-Offer" or "The Us vs. Them" framework.
+      2.  **Keyword Integration**: Identify 3-5 high-volume, high-intent keywords relevant to the visual context and weave them naturally into the copy for relevance score optimization.
+      3.  **Barometers for Success**: Focus on maximizing Click-Through Rate (CTR) and reducing Cost Per Acquisition (CPA).
 
       **Deliverables:**
       Generate 5 distinct ad variations. Each variation must have a unique tone:
-      1. **Direct Response** (Sales-focused, clear CTA, "Buy Now" mentality)
-      2. **Problem-Solution** (Agitate pain points, offer the product as the hero)
-      3. **Storytelling** (Narrative-driven, relatable, builds brand affinity)
-      4. **Social Proof/Trust** (Uses testimonials, numbers, or authority bias)
-      5. **Urgency/FOMO** (Scarcity, limited time, exclusive offer)
+      1.  **Direct Response** (Sales-focused, clear CTA, "Buy Now" mentality)
+      2.  **Problem-Solution** (Agitate pain points, offer the product as the hero)
+      3.  **Storytelling** (Narrative-driven, relatable, builds brand affinity)
+      4.  **Social Proof/Trust** (Uses testimonials, numbers, or authority bias)
+      5.  **Urgency/FOMO** (Scarcity, limited time, exclusive offer)
 
       For EACH variation, provide:
-      1. **Headline**: Short, punchy (max 40 chars).
-      2. **Description**: Link description (e.g., "Free Shipping", "4.9 Stars").
-      3. **Primary Text (Paragraph)**: Engaging prose with emojis, optimized for reading flow.
-      4. **Primary Text (Bullets)**: A punchy list of benefits/hooks with emojis, optimized for skimmers.
+      1.  **Headline**: Short, punchy (max 40 chars).
+      2.  **Description**: Link description (e.g., "Free Shipping", "4.9 Stars").
+      3.  **Primary Text (Paragraph)**: A compelling narrative block using emojis, optimized for reading flow.
+      4.  **Primary Text (Bullets)**: A punchy list of benefits/hooks using emojis, optimized for fast skimmers.
     `;
 
     const response = await ai.models.generateContent({
