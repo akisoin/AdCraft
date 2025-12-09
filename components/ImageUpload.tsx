@@ -1,18 +1,20 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { Upload, Image as ImageIcon, Video, X, Film } from 'lucide-react';
+import { Upload, Image as ImageIcon, Video, X, Film, Lock } from 'lucide-react';
 
 interface MediaUploadProps {
   onImageSelect: (file: File) => void;
   selectedImage: File | null;
   onClear: () => void;
   disabled: boolean;
+  isPro: boolean;
 }
 
 export const ImageUpload: React.FC<MediaUploadProps> = ({ 
   onImageSelect, 
   selectedImage, 
   onClear,
-  disabled 
+  disabled,
+  isPro
 }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -139,7 +141,14 @@ export const ImageUpload: React.FC<MediaUploadProps> = ({
           <>
             <ImageIcon className="w-6 h-6 text-slate-400" />
             <span className="text-slate-600">|</span>
-            <Video className="w-6 h-6 text-slate-400" />
+            <div className="relative">
+              <Video className={`w-6 h-6 ${isPro ? 'text-indigo-400' : 'text-slate-600'}`} />
+              {!isPro && (
+                <div className="absolute -top-2 -right-2 bg-slate-900 rounded-full p-0.5 border border-slate-700">
+                  <Lock size={10} className="text-yellow-500" />
+                </div>
+              )}
+            </div>
           </>
         )}
       </div>
@@ -148,7 +157,8 @@ export const ImageUpload: React.FC<MediaUploadProps> = ({
         {isDragging ? 'Drop media here' : 'Upload Image or Video'}
       </h3>
       <p className="text-slate-400 text-sm max-w-[200px]">
-        Drag & drop or click. Support for JPG, PNG, MP4, WebM.
+        Drag & drop or click. <br/>
+        <span className="text-xs text-slate-500">JPG, PNG supported. <br/> {isPro ? 'Video enabled.' : 'Video available in Pro.'}</span>
       </p>
     </div>
   );

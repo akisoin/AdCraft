@@ -21,19 +21,32 @@ const fileToGenerativePart = async (file: File): Promise<{ mimeType: string; dat
   });
 };
 
-export const generateAdCopy = async (mediaFile: File): Promise<AdCopy[]> => {
+export const generateAdCopy = async (mediaFile: File, instructions?: string): Promise<AdCopy[]> => {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
     const mediaPart = await fileToGenerativePart(mediaFile);
     
+    let userContextBlock = "";
+    if (instructions && instructions.trim().length > 0) {
+      userContextBlock = `
+      **IMPORTANT USER INSTRUCTIONS:**
+      The user has provided specific context for this ad campaign. You MUST strictly adhere to these guidelines:
+      "${instructions}"
+      
+      Ensure any keywords, target audience details, or brand voice notes provided above are deeply integrated into the copy.
+      `;
+    }
+
     const prompt = `
       You are an elite direct-response copywriter and media buyer with deep knowledge of the **Meta Ads Library** and **Google Keyword Planner**.
       Your task is to write high-converting ad copy for the uploaded creative (Image/Video).
       
+      ${userContextBlock}
+
       **Strategic Requirements:**
       1.  **Meta Ads Library Analysis**: Structure the copy based on high-performing "winning ads" currently active on Facebook/Instagram. Use patterns like "The Hook-Story-Offer" or "The Us vs. Them" framework.
-      2.  **Keyword Integration**: Identify 3-5 high-volume, high-intent keywords relevant to the visual context and weave them naturally into the copy for relevance score optimization.
+      2.  **Keyword Integration**: Identify 3-5 high-volume, high-intent keywords relevant to the visual context ${instructions ? 'AND the user instructions' : ''} and weave them naturally into the copy.
       3.  **Barometers for Success**: Focus on maximizing Click-Through Rate (CTR) and reducing Cost Per Acquisition (CPA).
 
       **Deliverables:**
