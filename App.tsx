@@ -3,6 +3,7 @@ import { ImageUpload } from './components/ImageUpload';
 import { CaptionCard } from './components/CaptionCard';
 import { PricingModal } from './components/PricingModal';
 import { InstructionInput } from './components/InstructionInput';
+import { FeatureCarousel } from './components/FeatureCarousel';
 import { generateAdCopy } from './services/geminiService';
 import { AdCopy, LoadingState } from './types';
 import { Sparkles, Loader2, Zap, Megaphone, Crown, Lock, History, Download } from 'lucide-react';
@@ -205,27 +206,8 @@ const App: React.FC = () => {
 
       <main className="container mx-auto px-4 md:px-6 max-w-5xl">
 
-        {/* Info / Why this works - Moved to Top */}
-        <div className="bg-slate-900/30 p-6 rounded-2xl border border-slate-800/50 mb-10 backdrop-blur-sm">
-          <h3 className="text-sm font-semibold text-slate-300 mb-4 flex items-center justify-center md:justify-start">
-            <Megaphone size={16} className="mr-2 text-indigo-400"/>
-            Why this works
-          </h3>
-          <ul className="grid md:grid-cols-3 gap-6 text-sm text-slate-400">
-            <li className="flex items-start">
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-600 mt-1.5 mr-2 shrink-0"></div>
-              <span><strong className="text-slate-300">Multimodal Analysis:</strong> AI sees your video/image to match the copy to the visual hook.</span>
-            </li>
-            <li className="flex items-start">
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-600 mt-1.5 mr-2 shrink-0"></div>
-              <span><strong className="text-slate-300">Conversion Focused:</strong> Tones are specifically calibrated for user action (clicks, leads, sales).</span>
-            </li>
-            <li className="flex items-start">
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-600 mt-1.5 mr-2 shrink-0"></div>
-              <span><strong className="text-slate-300">Platform Ready:</strong> Formatted for Facebook, Instagram, and LinkedIn ad managers.</span>
-            </li>
-          </ul>
-        </div>
+        {/* Info / Why this works - Carousel */}
+        <FeatureCarousel />
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
           
