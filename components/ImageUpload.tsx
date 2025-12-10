@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { Upload, Image as ImageIcon, Video, X, Film, Lock } from 'lucide-react';
+import { Image as ImageIcon, Video, X, Film, UploadCloud } from 'lucide-react';
 
 interface MediaUploadProps {
   onImageSelect: (file: File) => void;
@@ -80,7 +80,7 @@ export const ImageUpload: React.FC<MediaUploadProps> = ({
   // If we have a selected media, show preview
   if (selectedImage && previewUrl) {
     return (
-      <div className="relative w-full max-w-md mx-auto aspect-square rounded-2xl overflow-hidden border border-slate-700 bg-slate-900 shadow-2xl group">
+      <div className="relative w-full max-w-md mx-auto aspect-square rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-lg group">
         {isVideo ? (
            <video 
              src={previewUrl} 
@@ -99,7 +99,7 @@ export const ImageUpload: React.FC<MediaUploadProps> = ({
           <div className="absolute top-4 right-4 z-10">
              <button 
               onClick={handleClear}
-              className="bg-red-500/80 hover:bg-red-600 text-white p-2 rounded-full backdrop-blur-sm shadow-lg transition-transform hover:scale-105"
+              className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg transition-transform hover:scale-110 border-2 border-white"
               title="Remove media"
             >
               <X size={20} />
@@ -115,8 +115,8 @@ export const ImageUpload: React.FC<MediaUploadProps> = ({
     <div 
       className={`relative w-full max-w-md mx-auto aspect-[4/3] rounded-2xl border-2 border-dashed transition-all duration-300 ease-in-out cursor-pointer flex flex-col items-center justify-center text-center p-6
         ${isDragging 
-          ? 'border-indigo-500 bg-indigo-500/10 scale-[1.02]' 
-          : 'border-slate-700 hover:border-indigo-400 hover:bg-slate-800/50 bg-slate-900/50'
+          ? 'border-purple-500 bg-purple-50 scale-[1.02] shadow-xl shadow-purple-100' 
+          : 'border-slate-300 hover:border-purple-400 hover:bg-slate-50 bg-white'
         }
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
       `}
@@ -134,13 +134,15 @@ export const ImageUpload: React.FC<MediaUploadProps> = ({
         disabled={disabled}
       />
       
-      <div className="bg-slate-800 p-4 rounded-full mb-4 shadow-lg ring-1 ring-slate-700 flex items-center justify-center space-x-2">
+      <div className={`p-4 rounded-full mb-4 shadow-sm ring-1 flex items-center justify-center space-x-2 transition-colors duration-300
+        ${isDragging ? 'bg-white ring-purple-200' : 'bg-slate-50 ring-slate-200'}
+      `}>
         {isDragging ? (
-          <Film className="w-8 h-8 text-indigo-400" />
+          <UploadCloud className="w-8 h-8 text-purple-600 animate-bounce" />
         ) : (
           <>
             <ImageIcon className="w-6 h-6 text-slate-400" />
-            <span className="text-slate-600">|</span>
+            <span className="text-slate-300">|</span>
             <div className="relative">
               <Video className="w-6 h-6 text-slate-400" />
             </div>
@@ -148,12 +150,12 @@ export const ImageUpload: React.FC<MediaUploadProps> = ({
         )}
       </div>
       
-      <h3 className="text-lg font-semibold text-slate-200 mb-2">
-        {isDragging ? 'Drop media here' : 'Upload Image or Video'}
+      <h3 className={`text-lg font-bold mb-2 transition-colors ${isDragging ? 'text-purple-700' : 'text-slate-900'}`}>
+        {isDragging ? 'Drop it here!' : 'Upload Image or Video'}
       </h3>
-      <p className="text-slate-400 text-sm max-w-[200px]">
-        Drag & drop or click. <br/>
-        <span className="text-xs text-slate-500">JPG, PNG, MP4, MOV. <br/> Video supported.</span>
+      <p className={`text-sm max-w-[200px] ${isDragging ? 'text-purple-600' : 'text-slate-500'}`}>
+        Drag & drop or click to browse. <br/>
+        <span className="text-xs opacity-70">JPG, PNG, MP4, MOV supported.</span>
       </p>
     </div>
   );

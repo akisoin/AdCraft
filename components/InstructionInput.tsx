@@ -11,16 +11,16 @@ interface InstructionInputProps {
 
 export const InstructionInput: React.FC<InstructionInputProps> = ({ value, onChange, isPro, onUpgrade, disabled }) => {
   return (
-    <div className="bg-slate-900/50 rounded-2xl border border-slate-800 p-5 relative overflow-hidden group shadow-sm transition-colors hover:border-slate-700">
+    <div className="bg-white rounded-2xl border border-slate-200 p-5 relative overflow-hidden group shadow-sm transition-colors hover:border-slate-300">
       <div className="flex justify-between items-center mb-3">
-        <label className="text-sm font-semibold text-slate-300 flex items-center">
-          <Wand2 size={16} className="mr-2 text-indigo-400" />
+        <label className="text-sm font-semibold text-slate-900 flex items-center">
+          <Wand2 size={16} className="mr-2 text-indigo-600" />
           Custom Instructions
         </label>
         {!isPro && (
           <button 
             onClick={onUpgrade}
-            className="flex items-center text-[10px] font-bold text-yellow-500 bg-yellow-500/10 px-2 py-0.5 rounded border border-yellow-500/20 uppercase tracking-wide hover:bg-yellow-500/20 transition-colors"
+            className="flex items-center text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 uppercase tracking-wide hover:bg-amber-100 transition-colors"
           >
             <Lock size={10} className="mr-1" /> Pro Feature
           </button>
@@ -36,22 +36,22 @@ export const InstructionInput: React.FC<InstructionInputProps> = ({ value, onCha
             ? "e.g., Target audience is busy moms. Focus on 'time-saving' and 'healthy'. Use a humorous tone." 
             : "Upgrade to Pro to add specific keywords, brand voice guidelines, or campaign context..."
           }
-          className={`w-full bg-slate-950/50 border rounded-xl p-4 text-sm resize-none h-32 transition-all focus:ring-2 focus:ring-indigo-500/50 outline-none
+          className={`w-full bg-slate-50 border rounded-xl p-4 text-sm resize-none h-32 transition-all focus:ring-2 focus:ring-indigo-500/20 outline-none
             ${!isPro 
-              ? 'border-slate-800 text-slate-600 cursor-not-allowed bg-slate-900/30' 
-              : 'border-slate-700 text-slate-200 placeholder:text-slate-600 focus:border-indigo-500/50'
+              ? 'border-slate-200 text-slate-400 cursor-not-allowed' 
+              : 'border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-indigo-400 focus:bg-white'
             }
             ${disabled ? 'opacity-50' : ''}
           `}
         />
         
         {!isPro && (
-          <div className="absolute inset-0 flex items-center justify-center bg-slate-950/5 backdrop-blur-[1px] rounded-xl z-10">
+          <div className="absolute inset-0 flex items-center justify-center bg-white/60 backdrop-blur-[2px] rounded-xl z-10 transition-all">
              <button 
                onClick={onUpgrade}
-               className="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold py-2 px-4 rounded-lg shadow-lg border border-slate-700 transition-transform hover:scale-105 flex items-center"
+               className="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2.5 px-5 rounded-lg shadow-lg shadow-slate-200/50 border border-slate-700 transition-transform hover:scale-105 flex items-center"
              >
-               <Lock size={12} className="mr-2 text-yellow-400" />
+               <Lock size={12} className="mr-2 text-amber-400" />
                Unlock Context Control
              </button>
           </div>
